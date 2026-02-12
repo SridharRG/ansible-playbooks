@@ -1,0 +1,37 @@
+---
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install zsh
+  ansible.builtin.apt:
+    name: zsh
+    state: present
+
+- name: Check if oh-my-zsh is already installed
+  ansible.builtin.stat:
+    path: "{{ ansible_env.HOME }}/.oh-my-zsh"
+  register: oh_my_zsh_check
+
+- name: Install oh-my-zsh
+  ansible.builtin.shell: |
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  args:
+    creates: "{{ ansible_env.HOME }}/.oh-my-zsh"
+  when: not oh_my_zsh_check.stat.exists
+
+- name: Set zsh as default shell for current user
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    shell: /usr/bin/zsh
+  when: ansible_user_id != 'root'
+
+- name: Display zsh installation message
+  ansible.builtin.debug:
+    msg:
+      - "Zsh and Oh My Zsh have been successfully installed!"
+      - "Default shell has been changed to zsh"
+      - "You may need to log out and log back in for the change to take effect"
+      - "Or run: zsh"
+      - "Oh My Zsh configuration: {{ ansible_env.HOME }}/.zshrc"

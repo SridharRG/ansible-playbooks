@@ -9,8 +9,6 @@
   ansible.builtin.shell: |
     curl https://rclone.org/install.sh | bash
   when: rclone_check.rc != 0
-  args:
-    warn: false
 
 - name: Verify rclone installation
   ansible.builtin.command: rclone version
