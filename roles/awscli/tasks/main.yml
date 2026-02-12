@@ -1,0 +1,23 @@
+---
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install AWS CLI
+  ansible.builtin.apt:
+    name: awscli
+    state: present
+
+- name: Verify AWS CLI installation
+  ansible.builtin.command: aws --version
+  register: aws_version
+  changed_when: false
+
+- name: Display AWS CLI installation message
+  ansible.builtin.debug:
+    msg:
+      - "AWS CLI has been successfully installed!"
+      - "Version: {{ aws_version.stdout }}"
+      - "Configure with: aws configure"
+k
