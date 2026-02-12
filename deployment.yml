@@ -5,6 +5,10 @@
   connection: local
 
   roles:
+    - utilities
+    - network-utils
+    - awscli
+    - rclone
     - docker
     # Add more roles here as needed
     # - role_name
