@@ -1,0 +1,10 @@
+---
+- name: Setup Ubuntu VM with required software
+  hosts: localhost
+  become: true
+  connection: local
+
+  roles:
+    - docker
+    # Add more roles here as needed
+    # - role_name
