@@ -11,5 +11,8 @@
     - rclone
     - docker
     - caddy
+    - jq
+    - tmux
+    - zsh
     # Add more roles here as needed
     # - role_name

@@ -23,7 +23,19 @@ ansible-playbooks/
     ├── rclone/           # Rclone cloud storage tool
     │   └── tasks/
     │       └── main.yml
-    └── docker/           # Docker installation
+    ├── docker/           # Docker installation
+    │   └── tasks/
+    │       └── main.yml
+    ├── caddy/            # Caddy web server
+    │   └── tasks/
+    │       └── main.yml
+    ├── jq/               # JSON processor
+    │   └── tasks/
+    │       └── main.yml
+    ├── tmux/             # Terminal multiplexer
+    │   └── tasks/
+    │       └── main.yml
+    └── zsh/              # Zsh shell with Oh My Zsh
         └── tasks/
             └── main.yml
 ```
@@ -38,7 +50,6 @@ ansible-playbooks/
 
 ## Usage
 
-### Install All Software
 ### Install All Software
 
 To install all configured software on your Ubuntu VM, run:
@@ -70,7 +81,7 @@ This will install all roles in the following order:
 
 #### 3. AWS CLI
 - AWS Command Line Interface
-- Configure with: `aws configure`
+  -  Configure with: `aws configure`
 
 #### 4. Rclone
 - Cloud storage sync tool
@@ -83,6 +94,27 @@ This will install all roles in the following order:
 - Starts and enables Docker service
 - Adds your current user to docker group
 
+#### 6. Caddy
+- Modern web server with automatic HTTPS
+- Installed via official repository
+- Starts and enables Caddy service
+- Default configuration in `/etc/caddy/Caddyfile`
+
+#### 7. jq
+- JSON processor and query tool
+- Useful for parsing and manipulating JSON data
+- Command-line JSON processor
+
+#### 8. tmux
+- Terminal multiplexer
+- Allows multiple terminal sessions in one window
+- Session persistence across disconnections
+
+#### 9. zsh + Oh My Zsh
+- Enhanced shell with improved features
+- Oh My Zsh framework with themes and plugins
+- Sets zsh as default shell for the user
+
 ### Install Specific Roles Only
 
 To install only specific software, comment out unwanted roles in `deployment.yml`:
@@ -94,12 +126,14 @@ roles:
   # - awscli       # Comment to skip AWS CLI
   # - rclone       # Comment to skip Rclone
   - docker         # Docker installation
+  # - caddy        # Comment to skip Caddy
+  # - jq           # Comment to skip jq
+  # - tmux         # Comment to skip tmux
+  # - zsh          # Comment to skip zsh
 ```
 
 ### After Installation
 
-**For Docker:**
-You need to either:
 **For Docker:**
 You need to either:
 - Log out and log back in for group changes to take effect, OR
@@ -110,6 +144,27 @@ You need to either:
 
 **For Rclone:**
 - Configure remotes: `rclone config`
+
+**For Caddy:**
+- Caddy is immediately ready to use
+- Default configuration serves a welcome page on port 80
+- Configure your sites in `/etc/caddy/Caddyfile`
+
+**For zsh:**
+- You need to either:
+  - Log out and log back in for shell change to take effect, OR
+  - Run: `zsh`
+- Oh My Zsh configuration is in `~/.zshrc`
+- Customize themes and plugins in `~/.zshrc`
+
+**For tmux:**
+- Start a new session: `tmux`
+- Detach: `Ctrl+b` then `d`
+- Reattach: `tmux attach`
+
+**For jq:**
+- Process JSON: `echo '{"key":"value"}' | jq .`
+- Process files: `jq . < file.json`
 
 ### Verify Installation
 
@@ -135,6 +190,15 @@ docker compose version
 # Caddy
 caddy version
 sudo systemctl status caddy
+
+# jq
+jq --version
+
+# tmux
+tmux -V
+
+# zsh
+zsh --version
 ```
 
 ## Adding More Roles
@@ -161,6 +225,10 @@ To add more installation roles:
      - awscli
      - rclone
      - docker
+     - caddy
+     - jq
+     - tmux
+     - zsh
      - your-role-name  # Add here
    ```
 
