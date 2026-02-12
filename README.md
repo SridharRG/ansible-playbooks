@@ -128,6 +128,10 @@ rclone version
 # Docker
 docker --version
 docker compose version
+
+# Caddy
+caddy version
+sudo systemctl status caddy
 ```
 
 ## Adding More Roles

@@ -10,5 +10,6 @@
     - awscli
     - rclone
     - docker
+    - caddy
     # Add more roles here as needed
     # - role_name
