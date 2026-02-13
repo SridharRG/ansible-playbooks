@@ -35,7 +35,10 @@ ansible-playbooks/
     ├── tmux/             # Terminal multiplexer
     │   └── tasks/
     │       └── main.yml
-    └── zsh/              # Zsh shell with Oh My Zsh
+    ├── zsh/              # Zsh shell with Oh My Zsh
+    │   └── tasks/
+    │       └── main.yml
+    └── gh/                # GitHub CLI
         └── tasks/
             └── main.yml
 ```
@@ -115,6 +118,11 @@ This will install all roles in the following order:
 - Oh My Zsh framework with themes and plugins
 - Sets zsh as default shell for the user
 
+#### 10. GitHub CLI (gh)
+- Official GitHub command-line tool
+- Installed via official GitHub repository
+- Authenticate with: `gh auth login`
+
 ### Install Specific Roles Only
 
 To install only specific software, comment out unwanted roles in `deployment.yml`:
@@ -130,6 +138,7 @@ roles:
   # - jq           # Comment to skip jq
   # - tmux         # Comment to skip tmux
   # - zsh          # Comment to skip zsh
+  # - gh           # Comment to skip GitHub CLI
 ```
 
 ### After Installation
@@ -166,6 +175,11 @@ You need to either:
 - Process JSON: `echo '{"key":"value"}' | jq .`
 - Process files: `jq . < file.json`
 
+**For GitHub CLI:**
+- Authenticate: `gh auth login`
+- Check status: `gh auth status`
+- View help: `gh --help`
+
 ### Verify Installation
 
 ```bash
@@ -199,6 +213,9 @@ tmux -V
 
 # zsh
 zsh --version
+
+# GitHub CLI
+gh --version
 ```
 
 ## Adding More Roles
@@ -229,6 +246,7 @@ To add more installation roles:
      - jq
      - tmux
      - zsh
+     - gh
      - your-role-name  # Add here
    ```
 
