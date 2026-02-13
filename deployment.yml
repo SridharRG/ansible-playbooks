@@ -14,5 +14,6 @@
     - jq
     - tmux
     - zsh
+    - gh
     # Add more roles here as needed
     # - role_name
