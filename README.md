@@ -38,7 +38,10 @@ ansible-playbooks/
     ├── zsh/              # Zsh shell with Oh My Zsh
     │   └── tasks/
     │       └── main.yml
-    └── gh/                # GitHub CLI
+    ├── gh/                # GitHub CLI
+    │   └── tasks/
+    │       └── main.yml
+    └── zerotier/          # ZeroTier network
         └── tasks/
             └── main.yml
 ```
@@ -123,6 +126,12 @@ This will install all roles in the following order:
 - Installed via official GitHub repository
 - Authenticate with: `gh auth login`
 
+#### 11. ZeroTier
+- Software-defined networking platform
+- Creates secure virtual networks
+- Installed via official installation script
+- Starts and enables ZeroTier service
+
 ### Install Specific Roles Only
 
 To install only specific software, comment out unwanted roles in `deployment.yml`:
@@ -139,6 +148,7 @@ roles:
   # - tmux         # Comment to skip tmux
   # - zsh          # Comment to skip zsh
   # - gh           # Comment to skip GitHub CLI
+  # - zerotier     # Comment to skip ZeroTier
 ```
 
 ### After Installation
@@ -180,6 +190,13 @@ You need to either:
 - Check status: `gh auth status`
 - View help: `gh --help`
 
+**For ZeroTier:**
+- Join a network: `sudo zerotier-cli join <network-id>`
+- List networks: `sudo zerotier-cli listnetworks`
+- Leave a network: `sudo zerotier-cli leave <network-id>`
+- Get your ZeroTier address: `sudo zerotier-cli status`
+- Check service status: `sudo systemctl status zerotier-one`
+
 ### Verify Installation
 
 ```bash
@@ -216,6 +233,10 @@ zsh --version
 
 # GitHub CLI
 gh --version
+
+# ZeroTier
+sudo zerotier-cli --version
+sudo zerotier-cli status
 ```
 
 ## Adding More Roles
@@ -247,6 +268,7 @@ To add more installation roles:
      - tmux
      - zsh
      - gh
+     - zerotier
      - your-role-name  # Add here
    ```
 

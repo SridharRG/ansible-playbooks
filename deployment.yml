@@ -15,5 +15,6 @@
     - tmux
     - zsh
     - gh
+    - zerotier
     # Add more roles here as needed
     # - role_name
