@@ -2,8 +2,8 @@
 - name: Check if rclone is already installed
   ansible.builtin.command: which rclone
   register: rclone_check
-  ignore_errors: yes
   changed_when: false
+  failed_when: false
 
 - name: Install rclone via official script
   ansible.builtin.shell: |

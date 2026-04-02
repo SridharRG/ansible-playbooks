@@ -1,21 +1,18 @@
 ---
-- name: Setup Ubuntu VM with required software
-  hosts: localhost
+- name: Setup Ubuntu with required software
+  hosts: local
   become: true
-  connection: local
 
   roles:
-    - utilities
     - network-utils
+    - ufw
+    - utilities
     - awscli
     - rclone
-    - docker
-    - caddy
-    - jq
-    - tmux
-    - zsh
-    - gh
+    - ghcli
     - zerotier
     - fonts
-    # Add more roles here as needed
-    # - role_name
+    - docker
+    - caddy
+    - mongodb-tools
+    - shell
