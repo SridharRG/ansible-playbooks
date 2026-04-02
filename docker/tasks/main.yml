@@ -61,12 +61,11 @@
     state: started
     enabled: yes
 
-- name: Add current user to docker group
+- name: Add ubuntu user to docker group
   ansible.builtin.user:
-    name: "{{ ansible_user_id }}"
+    name: ubuntu
     groups: docker
     append: yes
-  when: ansible_user_id != 'root'
 
 - name: Display post-installation message
   ansible.builtin.debug:

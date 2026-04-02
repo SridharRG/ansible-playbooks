@@ -23,9 +23,10 @@
   environment:
     DEBIAN_FRONTEND: noninteractive
 
-- name: Install additional fonts
+- name: Install fontconfig and additional fonts
   ansible.builtin.apt:
     name:
+      - fontconfig
       - fonts-noto
       - fonts-noto-cjk
       - fonts-noto-color-emoji
@@ -33,7 +34,7 @@
     state: present
 
 - name: Update font cache
-  ansible.builtin.command: fc-cache -f -v
+  ansible.builtin.command: /usr/bin/fc-cache -f -v
   changed_when: false
 
 - name: Display fonts installation message

@@ -2,8 +2,8 @@
 - name: Check if ZeroTier is already installed
   ansible.builtin.command: which zerotier-cli
   register: zerotier_check
-  ignore_errors: yes
   changed_when: false
+  failed_when: false
 
 - name: Install ZeroTier via official script
   ansible.builtin.shell: |
